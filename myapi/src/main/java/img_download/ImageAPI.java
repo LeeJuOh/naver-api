@@ -85,6 +85,7 @@ public class ImageAPI {
 			}
 		} catch (Exception e) {
 
+			System.out.println("호이");
 			e.printStackTrace();
 		}
 	}
