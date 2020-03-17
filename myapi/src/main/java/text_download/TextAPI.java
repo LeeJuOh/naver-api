@@ -35,7 +35,7 @@ public class TextAPI {
 
 		try { // api 요청
 
-			for (int start = 1; start <= 1000; start += display) {
+			for (int start = 1; start <= 3000; start += display) {
 				if (start == 901)
 					start = 1000;
 				String urlstr = "https://openapi.naver.com/v1/search/blog.json?query=" + query + "&display=" + display
@@ -66,15 +66,15 @@ public class TextAPI {
 
 		try { // write
 
+			String fileName = savePath + text + ".txt";
+			PrintWriter writer = new PrintWriter(fileName);
 			for (int i = 0; i < text_list.size(); i++) {
 
 				System.out.println(text_list.get(i));
-				String fileName = savePath + text + "_" + i + ".txt";
-				PrintWriter writer = new PrintWriter(fileName);
-				writer.println(text_list.get(i));
-				writer.close();
+				writer.println(text_list.get(i) + ", " + text);
 
 			}
+			writer.close();
 		} catch (Exception e) {
 
 			e.printStackTrace();
