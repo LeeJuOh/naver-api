@@ -38,7 +38,7 @@ public class ImageAPI {
 		String query = null;
 
 		try { // text 인코딩
-			text = "짜장면";
+			text = "떡복이";
 			query = URLEncoder.encode(text, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
@@ -72,21 +72,20 @@ public class ImageAPI {
 			e.printStackTrace();
 		}
 
-		try { // download
+		for (int i = 0; i < link_list.size(); i++) { // download 파트
 
-			for (int i = 0; i < link_list.size(); i++) {
-
+			try {
 				saveFileName = text + "_" + i + "." + fileFormat;
 				File outputFile = new File(savePath + saveFileName);
 				img_url = new URL(link_list.get(i));
 				bi = ImageIO.read(img_url);
 				ImageIO.write(bi, fileFormat, outputFile);
+			} catch (Exception e) { // 이미지 url은 있지만 그 주소로 가보면 사진이 없어서 못가져옴. 예외처리
+
+				System.out.println(e.getMessage());
+				continue;
 
 			}
-		} catch (Exception e) {
-
-			System.out.println("2");
-			e.printStackTrace();
 		}
 	}
 }

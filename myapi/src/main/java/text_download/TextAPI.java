@@ -27,7 +27,7 @@ public class TextAPI {
 		BufferedOutputStream bs = null;
 
 		try { // text 인코딩
-			text = "조용한 분위기";
+			text = "가성비 좋은 곳";
 			query = URLEncoder.encode(text, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
