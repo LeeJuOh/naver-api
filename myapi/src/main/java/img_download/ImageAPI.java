@@ -38,7 +38,7 @@ public class ImageAPI {
 		String query = null;
 
 		try { // text 인코딩
-			text = "떡복이";
+			text = "찜닭";
 			query = URLEncoder.encode(text, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
@@ -78,9 +78,10 @@ public class ImageAPI {
 				saveFileName = text + "_" + i + "." + fileFormat;
 				File outputFile = new File(savePath + saveFileName);
 				img_url = new URL(link_list.get(i));
+				System.out.println(img_url);
 				bi = ImageIO.read(img_url);
 				ImageIO.write(bi, fileFormat, outputFile);
-			} catch (Exception e) { // 이미지 url은 있지만 그 주소로 가보면 사진이 없어서 못가져옴. 예외처리
+			} catch (Exception e) { // 이미지 url은 있지만 그 주소로 가보면 사진이 없어서 못가져옴. 여러거자 예외처리 그냥 다음거 긁게 함
 
 				System.out.println(e.getMessage());
 				continue;
