@@ -17,7 +17,7 @@ public class TextAPI {
 
 		String client_id = "UWVUkNseKo37aoyl40Uy";
 		String client_secret = "uPP2aapn6Y";
-		int display = 100;
+		int display = 1;
 		String json = null;
 		String savePath = "C://Users/LJO/Desktop/text/";
 		TextObject textObj = null;
@@ -35,7 +35,7 @@ public class TextAPI {
 
 		try { // api 요청
 
-			for (int start = 1; start <= 3000; start += display) {
+			for (int start = 1; start <= 1000; start += display) {
 				if (start == 901)
 					start = 1000;
 				String urlstr = "https://openapi.naver.com/v1/search/blog.json?query=" + query + "&display=" + display
@@ -48,7 +48,7 @@ public class TextAPI {
 
 				Response response = client.newCall(request).execute();
 				json = response.body().string();
-				// System.out.println(json);
+				System.out.println(json);
 
 				Gson gson = new Gson();
 				textObj = gson.fromJson(json, TextObject.class);

@@ -29,7 +29,7 @@ public class ImageAPI {
 		String json = null;
 		URL img_url = null;
 		BufferedImage bi = null;
-		String savePath = "C://Users/LJO/Desktop/image/";
+		String savePath = "C://Users/LJO/Desktop/image/naver/";
 		String fileFormat = "jpg";
 		String saveFileName = null;
 		ImageObject imgObj = null;
@@ -59,7 +59,7 @@ public class ImageAPI {
 
 				Response response = client.newCall(request).execute();
 				json = response.body().string();
-				// System.out.println(json);
+				System.out.println(json);
 
 				Gson gson = new Gson();
 				imgObj = gson.fromJson(json, ImageObject.class);
