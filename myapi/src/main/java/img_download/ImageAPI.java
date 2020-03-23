@@ -29,7 +29,10 @@ public class ImageAPI {
 		String json = null;
 		URL img_url = null;
 		BufferedImage bi = null;
-		String savePath = "C://Users/LJO/Desktop/image/naver/";
+
+		String juo_savePath = "C://Users/LJO/Desktop/image/naver/";
+		String savePath = "C://Users/parkwoojin/eclipse-workspace/naver-api/myapi/crawlingdata/";
+
 		String fileFormat = "jpg";
 		String saveFileName = null;
 		ImageObject imgObj = null;

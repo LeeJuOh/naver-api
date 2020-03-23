@@ -1,6 +1,8 @@
 package text_download;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -19,7 +21,8 @@ public class TextAPI {
 		String client_secret = "uPP2aapn6Y";
 		int display = 1;
 		String json = null;
-		String savePath = "C://Users/LJO/Desktop/text/";
+		String savePath = "C://Users/parkwoojin/eclipse-workspace/naver-api/myapi/crawlingdata/";
+		String juo_savePath = "C://Users/LJO/Desktop/text/";
 		TextObject textObj = null;
 		ArrayList<String> text_list = new ArrayList<String>();
 		String text = null;
@@ -27,7 +30,7 @@ public class TextAPI {
 		BufferedOutputStream bs = null;
 
 		try { // text 인코딩
-			text = "가성비 좋은 곳";
+			text = "데이트 음식";
 			query = URLEncoder.encode(text, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
@@ -54,8 +57,12 @@ public class TextAPI {
 				textObj = gson.fromJson(json, TextObject.class);
 
 				for (int i = 0; i < textObj.items.size(); i++) { // 태그 삭제
-					String replace_text = textObj.items.get(i).description.replaceAll("<b>", "");
-					replace_text = replace_text.replaceAll("</b>", "");
+					
+					String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]"; 
+					//한글유니코드(\uAC00-\uD7A3), 숫자 0~9(0-9), 영어 소문자a~z(a-z), 대문자A~Z(A-Z), 공백(\s)의 단어만 저장		
+					String replace_text = textObj.items.get(i).description.replaceAll(match, "");
+					replace_text = replace_text.replaceAll("b", "");					
+			
 					text_list.add(replace_text);
 				}
 
@@ -65,16 +72,19 @@ public class TextAPI {
 		}
 
 		try { // write
-
-			String fileName = savePath + text + ".txt";
-			PrintWriter writer = new PrintWriter(fileName);
+			
+			BufferedWriter fw = new BufferedWriter(new FileWriter(savePath+"/"+text+".csv",true));
+			// csv 파일 형태로 저장 			
 			for (int i = 0; i < text_list.size(); i++) {
 
 				System.out.println(text_list.get(i));
-				writer.println(text_list.get(i) + ", " + text);
+				
+				fw.write(text+","+text_list.get(i));
+				fw.newLine();
 
 			}
-			writer.close();
+			fw.flush();
+			fw.close();
 		} catch (Exception e) {
 
 			e.printStackTrace();
